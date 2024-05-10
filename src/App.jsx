@@ -1,7 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import { ExpenseIndex } from './pages/ExpenseIndex'
 import { AppHeader } from './cmps/AppHeader'
 import { Route, Routes } from 'react-router-dom'
