@@ -1,4 +1,3 @@
-
 @import "setup/functions";
 @import "setup/mixins";
 
@@ -7,4 +6,7 @@
 @import "basics/helpers";
 
 @import "cmps/home-page";
+@import "cmps/_expense-index";
+@import "cmps/_expense-list";
 @import "cmps/expense-preview";
+@import "cmps/expense-edit";

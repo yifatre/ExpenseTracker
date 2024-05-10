@@ -63,7 +63,7 @@ function getMonthName(date) {
 }
 
 function getFormattedDate(date) {
-    if (date.getFullYear() !== new Date().getFullYear())
+    // if (date.getFullYear() !== new Date().getFullYear())
         return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric', year:'numeric' })
-    return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric' })
+    // return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric' })
 }

@@ -1,0 +1,47 @@
+.expense-edit-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(86, 86, 86, 0.491);
+    display: grid;
+
+    & .expense-edit {
+        place-self: center;
+        position: relative;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 10px;
+
+        & .close-btn{
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: none;
+            border: none;
+            margin: 1rem;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 0;
+        }
+        & h2{
+            margin-bottom: 1rem;
+        }
+
+        & form {
+            display: grid;
+            gap: 1rem;
+
+            & label {
+                grid-column: 1/2;
+            }
+
+            & input {
+                grid-column: 2/3;
+            }
+
+            & :not(input, label) {
+                grid-column: span 2;
+            }
+        }
+    }
+
+}

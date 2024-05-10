@@ -7,12 +7,21 @@ import shoppingIcon from '../assets/img/shopping.svg'
 import { utilService } from '../services/util.service'
 
 export function ExpensePreview({ expense }) {
-    const icons = { food: foodIcon, groceries: groceriesIcon, transportation: transportIcon, other: otherIcon, utilities: utilitiesIcon, shopping: shoppingIcon }
-    return <article className='expense-preview'>
+    const icons = {
+        food: foodIcon,
+        groceries: groceriesIcon,
+        transportation: transportIcon,
+        other: otherIcon,
+        utilities: utilitiesIcon,
+        shopping: shoppingIcon
+    }
+    return <li className='expense-preview'>
         <img src={icons[expense.category.toLowerCase()]} alt="" />
         <h3 className='category'>{expense.category}</h3>
         <p className='notes'>{expense.notes}</p>
         <p className='amount'>{expense.amount.toFixed(2)}₪</p>
         <p className='date'>{utilService.getFormattedDate(new Date(expense.date))}</p>
-    </article>
+        {/* <button>✕</button>
+        <button>✏️</button> */}
+    </li>
 }
