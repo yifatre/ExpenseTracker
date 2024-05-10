@@ -1,0 +1,33 @@
+.expense-preview{
+    display: grid;
+    grid-template-areas: 
+    "img cat  amnt"
+    "img note date"
+    ;
+
+    place-items: center;
+
+    & img{
+        grid-area: img;
+        height: 2.5rem;
+    }
+
+    & .category{
+        grid-area: cat;
+        text-transform: capitalize;
+    }
+
+    & .notes{
+        grid-area: note;
+    }
+
+    & .amount{
+        grid-area: amnt;
+    }
+
+    & .date{
+        grid-area: date;
+    }
+
+
+}

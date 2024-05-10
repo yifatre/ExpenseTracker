@@ -1,0 +1,104 @@
+/* Breakpoint mixins */
+
+@mixin for-mobile-layout {
+    @media (max-width: calc($mobile-breakpoint + 40px)) {
+        @content;
+    }
+}
+
+@mixin for-narrow-layout {
+    @media (min-width: calc($mobile-breakpoint + 40px)) {
+        @content;
+    }
+}
+
+@mixin for-normal-layout {
+    @media (min-width: calc($narrow-breakpoint + 40px)) {
+        @content;
+    }
+}
+
+@mixin for-wide-layout {
+    @media (min-width: calc($normal-breakpoint + 40px)) {
+        @content;
+    }
+}
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc(($height / $width) * 100%);
+    }
+
+    >* {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    >img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+// Mixin for removing hover effects on iphone screen
+@mixin hover-supported {
+    @media not all and (pointer: coarse) {
+        &:hover {
+            @content;
+        }
+    }
+}
+
+@mixin svg-container($height: 16px, $width: 16px) {
+    display: inline-block;
+    width: rem($width);
+    height: rem($height);
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin reg-btn($width: 32px, $padding: 8px) {
+    display: grid;
+    place-items: center;
+    width: rem(32px);
+    height: rem($width);
+    background-color: transparent;
+    border: none;
+    border-radius: rem(8px);
+    color: inherit;
+    padding: rem($padding);
+    font-weight: 500;
+    font-size: rem(14px);
+}
+
+@mixin avatar ($size) {
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+
+    img, .initials {
+        position: relative;
+        border-radius: 50%;
+        height: rem($size);
+        width: rem($size);
+        background-color: transparent;
+        display: grid;
+        place-items: center;
+        font-size: rem(12px);
+    }
+    &:hover {
+        opacity: 70%;
+    }
+}
