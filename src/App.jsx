@@ -8,7 +8,7 @@ export function App() {
     return (
         <>
             <AppHeader />
-            <main>
+            <main className='main-layout'>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/expense" element={<ExpenseIndex />} >

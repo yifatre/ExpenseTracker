@@ -1,6 +1,7 @@
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { expenseService } from '../services/expense.service'
 import { useEffect, useState } from 'react'
+import { utilService } from '../services/util.service'
 
 export function ExpenseEdit() {
     const { id } = useParams()
@@ -62,7 +63,7 @@ export function ExpenseEdit() {
                 <label htmlFor="date">
                     Date:
                 </label>
-                <input type="date" name="date" id="date" onChange={handleChange} value={expenseToEdit.date ? new Date(expenseToEdit.date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10)} />
+                <input type="date" name="date" id="date" onChange={handleChange} value={expenseToEdit.date ? utilService.getDateStrForInput(new Date(expenseToEdit.date)) : utilService.getDateStrForInput(new Date())} />
                 <label htmlFor="notes">
                     Notes:
                 </label>

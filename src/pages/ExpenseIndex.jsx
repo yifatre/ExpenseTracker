@@ -3,15 +3,17 @@ import { expenseService } from '../services/expense.service'
 import { ExpenseList } from '../cmps/ExpenseList'
 import { Outlet } from 'react-router-dom'
 import { PieChart } from '../cmps/Charts'
+import { ExpenseFilter } from '../cmps/ExpenseFilter'
 
 export function ExpenseIndex() {
-    // expenses
+
     const [expenses, setExpenses] = useState(null)
-    // chartData
     const [chartData, setChartData] = useState(null)
+    const [filterBy, setFilterBy] = useState(expenseService.getDefaultFilter())
+
     useEffect(() => {
         loadExpenses()
-    }, [])
+    }, [filterBy])
 
     useEffect(() => {
         setChartData(getChartData())
@@ -19,7 +21,7 @@ export function ExpenseIndex() {
 
     async function loadExpenses() {
         try {
-            const _expenses = await expenseService.query()
+            const _expenses = await expenseService.query(filterBy)
             setExpenses(_expenses)
         }
         catch (err) {
@@ -47,9 +49,14 @@ export function ExpenseIndex() {
         return dataMap
     }
 
+    function onSetFilter(fieldsToUpdate) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
+    }
+
     return <section className="expense-index">
+        <ExpenseFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <ExpenseList expenses={expenses} />
-        {chartData && <PieChart chartData={chartData}/>}
+        {chartData && <PieChart chartData={chartData} />}
         <Outlet context={[onSave]} />
     </section>
 }

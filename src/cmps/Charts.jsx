@@ -7,7 +7,7 @@ export function PieChart({ chartData }) {
         labels: Object.keys(chartData),
         datasets: [
             {
-                label: 'amount [₪]',
+                label: 'total amount ₪',
                 data: Object.values(chartData),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -29,7 +29,8 @@ export function PieChart({ chartData }) {
             },
         ],
     }
-    return <div>
+    return <div className='pie-chart'>
+        <h3>Expense distribution by category:</h3>
         <Pie data={data} />
     </div>
 }

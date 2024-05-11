@@ -1,0 +1,15 @@
+.expense-filter {
+    gap: 1rem;
+    margin-block: 1rem;
+    grid-area: filter;
+
+    & :is(input, select) {
+        margin-left: 0.5rem;
+        height: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    & input {
+        text-align: center;
+    }
+}

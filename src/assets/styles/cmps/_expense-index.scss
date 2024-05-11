@@ -1,4 +1,10 @@
-.expense-index{
+.expense-index {
     display: grid;
-    grid-template-columns: 1fr max-content 1fr;
+    grid-template-areas: 
+    "filter pie"
+    "list pie"
+    ;
+
+    grid-template-rows: max-content 1fr;
+    column-gap: 2rem;
 }

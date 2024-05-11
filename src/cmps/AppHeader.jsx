@@ -1,3 +1,5 @@
 export function AppHeader() {
-    return <div></div>
+    return <header>
+        Expense Tracker
+    </header>
 }

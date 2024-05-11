@@ -7,7 +7,9 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
-    getFormattedDate
+    getDateStrForInput,
+    getFormattedDate,
+    debounce
 }
 
 function makeId(length = 6) {
@@ -62,8 +64,18 @@ function getMonthName(date) {
     return monthNames[date.getMonth()]
 }
 
+function getDateStrForInput(date) {
+    return date.toLocaleDateString('en-IL', { month: '2-digit', day: '2-digit', year: 'numeric' }).slice(0, 10).split('/').toReversed().join('-')
+}
+
 function getFormattedDate(date) {
-    // if (date.getFullYear() !== new Date().getFullYear())
-        return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric', year:'numeric' })
-    // return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric' })
+    return date.toLocaleDateString('en-IL', { month: 'long', day: 'numeric', year: 'numeric' })
+}
+
+function debounce(func, timeout = 300) {
+    let timer
+    return (...args) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
+    }
 }

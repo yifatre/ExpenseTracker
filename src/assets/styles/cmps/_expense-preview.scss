@@ -11,7 +11,11 @@
     row-gap: 0.3rem;
 
     margin-block: 1rem;
-    
+    padding: 0.7rem;
+    border-radius: 10px;
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
     & img{
         grid-area: img;
         height: 2.5rem;
@@ -28,10 +32,12 @@
 
     & .amount{
         grid-area: amnt;
+        justify-self: end;
     }
 
     & .date{
         grid-area: date;
+        justify-self: end;
     }
 
 

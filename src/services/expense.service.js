@@ -11,10 +11,7 @@ export const expenseService = {
     remove,
     save,
     getEmptyExpense,
-    // getNextExpenseId,
-    // getFilterBy,
     getDefaultFilter,
-    setFilterBy,
     getCategories
 }
 
@@ -23,12 +20,14 @@ window.bs = expenseService //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 async function query(filterBy = getDefaultFilter()) {
     let expenses = await storageService.query(EXPENSE_KEY)
 
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'ig')
-        expenses = expenses.filter(expense => regex.test(expense.category) || regex.test(expense.notes))
+    if (filterBy.category) {
+        expenses = expenses.filter(expense => expense.category.toLowerCase() === filterBy.category.toLowerCase())
     }
-    if (filterBy.minAmount) {
-        expenses = expenses.filter(expense => expense.amount >= filterBy.minAmount)
+    if (filterBy.startDate) {
+        expenses = expenses.filter(expense => expense.date >= filterBy.startDate)
+    }
+    if (filterBy.toDate) {
+        expenses = expenses.filter(expense => expense.date <= filterBy.toDate)
     }
     return expenses
 
@@ -62,14 +61,14 @@ function getEmptyExpense() {
 }
 
 function getDefaultFilter() {
-    return { txt: '', minAmount: 0 }
+    return { category: '', startDate: new Date(new Date().getFullYear(), 0).valueOf(), toDate: Date.now() }
 }
 
-function setFilterBy(filterBy = {}) {
-    if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-    if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
-    return gFilterBy
-}
+// function setFilterBy(filterBy = {}) {
+//     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
+//     if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
+//     return gFilterBy
+// }
 
 
 // function _setNextPrevExpenseId(expense) {
@@ -91,28 +90,28 @@ function _createExpenses() {
                 _id: 'e001',
                 amount: 100.50,
                 category: 'groceries',
-                date: new Date('2024-05-01'),
+                date: new Date('2024-05-01').valueOf(),
                 notes: 'Bought fruits and vegetables'
             },
             {
                 _id: 'e002',
                 amount: 50.25,
                 category: 'food',
-                date: new Date('2024-05-05'),
+                date: new Date('2024-05-05').valueOf(),
                 notes: 'Ate pizza'
             },
             {
                 _id: 'e003',
                 amount: 200.00,
                 category: 'shopping',
-                date: new Date('2024-05-08'),
+                date: new Date('2024-05-08').valueOf(),
                 notes: 'New clothes'
             },
             {
                 _id: 'e004',
                 amount: 20.00,
                 category: 'transportation',
-                date: new Date('2023-05-10'),
+                date: new Date('2023-05-10').valueOf(),
                 notes: 'Bus fare'
             }
         ]
