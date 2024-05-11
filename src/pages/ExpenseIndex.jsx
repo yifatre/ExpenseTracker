@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
+// import { expenseService } from '../services/expense.service.local'
 import { expenseService } from '../services/expense.service'
 import { ExpenseList } from '../cmps/ExpenseList'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { PieChart } from '../cmps/Charts'
 import { ExpenseFilter } from '../cmps/ExpenseFilter'
+import { loadExpenses, removeExpense, saveExpense } from '../store/actions/expense.actions'
+import { useSelector } from 'react-redux'
 
 export function ExpenseIndex() {
 
-    const [expenses, setExpenses] = useState(null)
+    // const [expenses, setExpenses] = useState(null)
+    const expenses = useSelector(storeState => storeState.expenseModule.expenses)
     const [chartData, setChartData] = useState(null)
     const [filterBy, setFilterBy] = useState(expenseService.getDefaultFilter())
 
@@ -19,21 +23,19 @@ export function ExpenseIndex() {
         setChartData(getChartData())
     }, [expenses])
 
-    async function loadExpenses() {
+    async function onSave(expense) {
         try {
-            const _expenses = await expenseService.query(filterBy)
-            setExpenses(_expenses)
+            const savedExpense = await saveExpense(expense)
+            return savedExpense
         }
         catch (err) {
             console.error(err)
         }
     }
 
-    async function onSave(expense) {
+    function onDeleteExpense(id) {
         try {
-            const savedExpense = await expenseService.save(expense)
-            setExpenses([...expenses, savedExpense])
-            return savedExpense
+            removeExpense(id)
         }
         catch (err) {
             console.error(err)
@@ -54,9 +56,10 @@ export function ExpenseIndex() {
     }
 
     return <section className="expense-index">
+        <Link to='/expense/edit'>Add an expense</Link>
         <ExpenseFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-        <ExpenseList expenses={expenses} />
+        <ExpenseList expenses={expenses} onDeleteExpense={onDeleteExpense} />
         {chartData && <PieChart chartData={chartData} />}
-        <Outlet context={[onSave]} />
+        <Outlet context={[onSave, expenses]} />
     </section>
 }

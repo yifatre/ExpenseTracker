@@ -2,32 +2,25 @@ import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { expenseService } from '../services/expense.service'
 import { useEffect, useState } from 'react'
 import { utilService } from '../services/util.service'
+import { useSelector } from 'react-redux'
 
 export function ExpenseEdit() {
     const { id } = useParams()
+    // const expenseToEdit = useSelector(storeState => storeState.expenseModule.expenses.find(ex => ex._id === id))
     const [expenseToEdit, setExpenseToEdit] = useState(expenseService.getEmptyExpense())
-    const [onSave] = useOutletContext()
+    const [onSave, expenses] = useOutletContext()
     const navigate = useNavigate()
 
     useEffect(() => {
-
+        // logg
         if (id) {
-            const f = async () => {
-                try {
-                    const _expense = await expenseService.getById(id)
-                    setExpenseToEdit(_expense)
-                }
-                catch (err) {
-                    console.error(err)
-                }
-            }
-            f()
+            setExpenseToEdit(expenses.find(ex => ex._id === id))
         }
     }, [])
 
-    // useEffect(() => {
-    //     console.log('expenseToEdit', expenseToEdit)
-    // }, [expenseToEdit])
+    useEffect(() => {
+        console.log('expenseToEdit', expenseToEdit)
+    }, [expenseToEdit])
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
@@ -52,9 +45,9 @@ export function ExpenseEdit() {
             <button className='close-btn' onClick={onCloseEdit}>✕</button>
             <h2>{id ? 'Edit expense' : 'Add an expense'}</h2>
             <form className='' onSubmit={(ev) => { ev.preventDefault(); onSave(expenseToEdit) }}>
-                <select name="category" id="category" onChange={handleChange} defaultValue={expenseToEdit.category ? expenseToEdit.category : 'DEFAULT'}>
-                    <option value="DEFAULT" disabled >Category</option>
-                    {expenseService.getCategories().map(category => <option key={category} value={category}>{category}</option>)}
+                <select name="category" id="category" onChange={handleChange} defaultValue={expenseToEdit.category ? expenseToEdit.category?.toLowerCase() : 'DEFAULT'}>
+                    <option value="DEFAULT" disabled>Category</option>
+                    {expenseService.getCategories().map(category => <option key={category} value={category.toLowerCase()} selected={category.toLowerCase() === expenseToEdit.category.toLowerCase()}>{category}</option>)}
                 </select>
                 <label htmlFor="amount">
                     Amount:

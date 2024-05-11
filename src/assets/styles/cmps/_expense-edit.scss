@@ -41,6 +41,10 @@
             & :not(input, label) {
                 grid-column: span 2;
             }
+
+            & select{
+                text-transform: capitalize;
+            }
         }
     }
 

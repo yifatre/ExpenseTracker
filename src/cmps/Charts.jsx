@@ -31,6 +31,6 @@ export function PieChart({ chartData }) {
     }
     return <div className='pie-chart'>
         <h3>Expense distribution by category:</h3>
-        <Pie data={data} />
+        <Pie data={data}  />
     </div>
 }

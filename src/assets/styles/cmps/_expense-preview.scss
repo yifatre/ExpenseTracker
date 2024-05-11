@@ -1,8 +1,8 @@
 .expense-preview{
     display: grid;
     grid-template-areas: 
-    "img cat  amnt"
-    "img note date"
+    "img cat  amnt del"
+    "img note date edit"
     ;
     grid-template-columns: 4rem 1fr 10rem;
 
@@ -11,7 +11,7 @@
     row-gap: 0.3rem;
 
     margin-block: 1rem;
-    padding: 0.7rem;
+    padding: 0.7rem 1rem;
     border-radius: 10px;
 
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -40,5 +40,23 @@
         justify-self: end;
     }
 
+    & .del-btn{
+        grid-area: del;
+        font-size: 1rem;
+    }
+
+    & .edit-btn{
+        grid-area: edit;
+    }
+
+    & button{
+        background: none;
+        border: none;
+
+        transition: transform 200ms;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
 
 }

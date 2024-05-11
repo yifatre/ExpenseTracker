@@ -1,10 +1,15 @@
 .expense-index {
     display: grid;
     grid-template-areas: 
+    "add pie"
     "filter pie"
     "list pie"
     ;
 
     grid-template-rows: max-content 1fr;
     column-gap: 2rem;
+
+    & a{
+        margin-top: 1rem;
+    }
 }

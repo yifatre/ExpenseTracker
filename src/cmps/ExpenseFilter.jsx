@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { utilService } from '../services/util.service'
-import { expenseService } from '../services/expense.service'
+import { expenseService } from '../services/expense.service.local'
 
 export function ExpenseFilter({ filterBy, onSetFilter }) {
 
