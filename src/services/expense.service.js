@@ -58,7 +58,7 @@ function getEmptyExpense() {
 }
 
 function getDefaultFilter() {
-    return { category: '', startDate: new Date(new Date().getFullYear(), 0).valueOf(), toDate: Date.now() }
+    return { category: '', startDate: new Date(new Date().getFullYear(), 0).valueOf(), toDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 23, 59, 59).valueOf() }
 }
 
 function getCategories() {

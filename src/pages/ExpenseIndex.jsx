@@ -9,7 +9,7 @@ import { removeExpense, saveExpense } from '../store/actions/expense.actions'
 import { useSelector } from 'react-redux'
 
 export function ExpenseIndex() {
-
+    const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const expenses = useSelector(storeState => storeState.expenseModule.expenses)
     const [expensesToShow, setExpensesToShow] = useState(expenses)
     const [chartData, setChartData] = useState(null)
@@ -19,14 +19,14 @@ export function ExpenseIndex() {
     useEffect(() => {
         console.log('effect',)
         console.log('expenses', expenses)
-        updateExpensesToShow()
+        updateExpensesToShow(expenses)
     }, [expenses, filterBy])
 
     useEffect(() => {
         setChartData(getChartData())
     }, [expensesToShow])
 
-    function updateExpensesToShow() {
+    function updateExpensesToShow(expenses) {
         let _expenses = expenses.map(ex => ex)
         if (filterBy.category) {
             _expenses = _expenses.filter(expense => expense.category.toLowerCase() === filterBy.category.toLowerCase())
@@ -37,7 +37,6 @@ export function ExpenseIndex() {
         if (filterBy.toDate) {
             _expenses = _expenses.filter(expense => expense.date <= filterBy.toDate)
         }
-        console.log('_expenses', _expenses)
         setExpensesToShow(_expenses)
     }
 
@@ -74,11 +73,11 @@ export function ExpenseIndex() {
     function onSetFilter(fieldsToUpdate) {
         setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
     }
-
+    if (!loggedInUser) return <section className="expense-index">Login or sign up to manage your expenses</section>
     return <section className="expense-index">
         <Link to='/expense/edit'>Add an expense</Link>
         <ExpenseFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-        {expensesToShow && <ExpenseList expenses={expensesToShow} onDeleteExpense={onDeleteExpense} />}
+        <ExpenseList expenses={expensesToShow} onDeleteExpense={onDeleteExpense} />
         {chartData && <PieChart chartData={chartData} />}
         <Outlet context={[onSave, expenses]} />
     </section>
