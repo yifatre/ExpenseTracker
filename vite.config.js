@@ -9,5 +9,5 @@ export default defineConfig({
         emptyOutDir: true,
     },
     assetsInclude:['**/*.svg'],
-    base: './'
+    base: '/'
 })
