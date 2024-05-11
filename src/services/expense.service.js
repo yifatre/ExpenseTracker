@@ -41,9 +41,7 @@ function remove(expenseId) {
 }
 
 async function save(expense) {
-    console.log('expense******', expense)
     if (expense._id) {
-        console.log('expense._id', expense._id)
         return await httpService.put(`${EXPENSE_KEY}/${expense._id}`, expense)
     } else {
         return await httpService.post(EXPENSE_KEY, expense)

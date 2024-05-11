@@ -3,6 +3,7 @@ import { expenseService } from '../services/expense.service'
 import { useEffect, useState } from 'react'
 import { utilService } from '../services/util.service'
 import { useSelector } from 'react-redux'
+import { loadExpenses } from '../store/actions/expense.actions'
 
 export function ExpenseEdit() {
     const { id } = useParams()
@@ -12,15 +13,16 @@ export function ExpenseEdit() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        if (!expenses || !expenses.length) onCloseEdit()
         // logg
         if (id) {
             setExpenseToEdit(expenses.find(ex => ex._id === id))
         }
     }, [])
 
-    useEffect(() => {
-        console.log('expenseToEdit', expenseToEdit)
-    }, [expenseToEdit])
+    // useEffect(() => {
+    //     console.log('expenseToEdit', expenseToEdit)
+    // }, [expenseToEdit])
 
     function handleChange({ target }) {
         let { value, name: field, type } = target

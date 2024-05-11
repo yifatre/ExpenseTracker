@@ -19,12 +19,8 @@ export async function loadExpenses() {
 }
 
 export async function removeExpense(expenseId) {
-    console.log("expenseId", expenseId)
-
     try {
         const removedExpense = await expenseService.remove(expenseId)
-        
-        console.log('111111111111111111111')
         store.dispatch({ type: REMOVE_EXPENSE, expenseId })
         return removedExpense
     } catch (err) {
@@ -35,8 +31,6 @@ export async function removeExpense(expenseId) {
 
 export async function saveExpense(expense) {
     const type = expense._id ? UPDATE_EXPENSE : ADD_EXPENSE
-    console.log('expense from service', expense)
-    console.log('type', type)
     try {
         const savedExpense = await expenseService.save(expense)
         store.dispatch({ type, expense: savedExpense })

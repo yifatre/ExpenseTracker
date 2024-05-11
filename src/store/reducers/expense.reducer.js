@@ -14,7 +14,6 @@ const initialState = {
     expenses: [],
     isLoading: false,
     filterBy: expenseService.getDefaultFilter(),
-    lastExpenses: []
 }
 
 export function expenseReducer(state = initialState, action = {}) {
@@ -30,7 +29,7 @@ export function expenseReducer(state = initialState, action = {}) {
                 lastExpenses
             }
         case ADD_EXPENSE:
-
+            console.log('add', )
             return {
                 ...state,
                 expenses: [...state.expenses, action.expense]

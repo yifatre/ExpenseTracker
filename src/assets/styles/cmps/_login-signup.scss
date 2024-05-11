@@ -1,0 +1,15 @@
+.login-signup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-inline-end: 1rem;
+
+    & form {
+        align-items: center;
+        gap: 0.2rem;
+    }
+
+    & span {
+        font-weight: 500;
+    }
+}
