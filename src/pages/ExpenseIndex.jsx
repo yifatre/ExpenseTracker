@@ -8,6 +8,8 @@ import { ExpenseFilter } from '../cmps/ExpenseFilter'
 import { removeExpense, saveExpense } from '../store/actions/expense.actions'
 import { useSelector } from 'react-redux'
 
+import plus from '../assets/img/plus-circle.svg'
+
 export function ExpenseIndex() {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const expenses = useSelector(storeState => storeState.expenseModule.expenses)
@@ -17,8 +19,6 @@ export function ExpenseIndex() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log('effect',)
-        console.log('expenses', expenses)
         updateExpensesToShow(expenses)
     }, [expenses, filterBy])
 
@@ -27,7 +27,7 @@ export function ExpenseIndex() {
     }, [expensesToShow])
 
     function updateExpensesToShow(expenses) {
-        let _expenses = expenses.map(ex => ex)
+        let _expenses = expenses?.map(ex => ex)
         if (filterBy.category) {
             _expenses = _expenses.filter(expense => expense.category.toLowerCase() === filterBy.category.toLowerCase())
         }
@@ -44,7 +44,6 @@ export function ExpenseIndex() {
         try {
             const savedExpense = await saveExpense(expense)
             updateExpensesToShow()
-            navigate('/expense')
             return savedExpense
         }
         catch (err) {
@@ -75,7 +74,7 @@ export function ExpenseIndex() {
     }
     if (!loggedInUser) return <section className="expense-index">Login or sign up to manage your expenses</section>
     return <section className="expense-index">
-        <Link to='/expense/edit'>Add an expense</Link>
+        <Link className='flex align-center' to='/expense/edit'><img src={plus} alt="" />Add an expense</Link>
         <ExpenseFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <ExpenseList expenses={expensesToShow} onDeleteExpense={onDeleteExpense} />
         {chartData && <PieChart chartData={chartData} />}

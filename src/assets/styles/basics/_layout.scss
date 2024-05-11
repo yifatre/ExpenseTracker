@@ -1,8 +1,13 @@
 .main-layout {
     display: grid;
-    grid-template-columns: 1fr max-content 1fr;
+    grid-template-columns: 1fr 900px 1fr;
 
     &>* {
         grid-column: 2/3;
+    }
+
+    @include for-mobile-layout {
+        grid-template-columns: 10px 1fr 10px;
+
     }
 }

@@ -1,7 +1,23 @@
-header{
+header {
     height: 5rem;
     padding: 0.5rem;
-    background-color:lightslategray;
+    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
     align-items: center;
+    width: 100vw;
 
+    @include for-mobile-layout {
+        height: 8rem;
+    }
+
+    & div.flex {
+        @include for-mobile-layout {
+            flex-direction: column;
+        }
+
+        & h1 {
+            @include for-mobile-layout {
+                font-size: 1.7rem;
+            }
+        }
+    }
 }

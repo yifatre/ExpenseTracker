@@ -82,9 +82,9 @@ export function LoginSignUp() {
                     {isSignup ? 'Already a member? Login' : 'New user? Signup here'}
                 </a>
             </div></>}
-        {loggedInUser && <>
+        {loggedInUser && <div className='hello'>
             <span>Hello {loggedInUser.fullName}</span>
             <button onClick={logout}>Logout</button>
-        </>}
+        </div>}
     </div>
 }

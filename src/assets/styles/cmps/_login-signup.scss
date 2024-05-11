@@ -12,4 +12,15 @@
     & span {
         font-weight: 500;
     }
+
+    & .hello {
+        display: flex;
+        gap: 1rem;
+    }
+
+    @include for-mobile-layout {
+        flex-direction: column;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
 }

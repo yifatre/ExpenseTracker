@@ -1,15 +1,29 @@
 .expense-index {
     display: grid;
-    grid-template-areas: 
-    "add pie"
-    "filter pie"
-    "list pie"
+    grid-template-areas:
+        "add pie"
+        "filter pie"
+        "list pie"
     ;
 
     grid-template-rows: max-content max-content 1fr;
     column-gap: 2rem;
 
-    &>a{
+    &>a {
         margin-top: 1rem;
+        gap: 0.2rem;
+        & img{
+            height: 1rem;
+        }
+    }
+
+    @include for-mobile-layout {
+        grid-template-areas:
+            "pie"
+            "add"
+            "filter"
+            "list"
+        ;
+        grid-template-rows: max-content max-content max-content 1fr;
     }
 }

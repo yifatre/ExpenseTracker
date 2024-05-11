@@ -42,11 +42,22 @@ export function ExpenseEdit() {
         if (ev.target.className === 'expense-edit-backdrop') onCloseEdit()
     }
 
+    async function onSaveExpense(ev) {
+        ev.preventDefault()
+        try {
+            const savedExpense = await onSave(expenseToEdit)
+            onCloseEdit()
+        }
+        catch (err) {
+            console.error(err)
+        }
+    }
+
     return <div className='expense-edit-backdrop' onClick={onBackdropClick}>
         <div className='expense-edit'>
             <button className='close-btn' onClick={onCloseEdit}>✕</button>
             <h2>{id ? 'Edit expense' : 'Add an expense'}</h2>
-            <form className='' onSubmit={(ev) => { ev.preventDefault(); onSave(expenseToEdit) }}>
+            <form className='' onSubmit={onSaveExpense}>
                 <select name="category" id="category" onChange={handleChange} defaultValue={expenseToEdit.category ? expenseToEdit.category?.toLowerCase() : 'DEFAULT'}>
                     <option value="DEFAULT" disabled>Category</option>
                     {expenseService.getCategories().map(category => <option key={category} value={category.toLowerCase()} selected={category.toLowerCase() === expenseToEdit.category.toLowerCase()}>{category}</option>)}

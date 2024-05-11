@@ -7,6 +7,9 @@
         margin-left: 0.5rem;
         height: 1.5rem;
         font-size: 0.9rem;
+        @include for-mobile-layout {
+            margin-top: 0.3rem;
+        }
     }
 
     & input {

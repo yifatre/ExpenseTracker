@@ -1,10 +1,10 @@
-.expense-preview{
+.expense-preview {
     display: grid;
-    grid-template-areas: 
-    "img cat  amnt del"
-    "img note date edit"
+    grid-template-areas:
+        "img cat  amnt del"
+        "img note date edit"
     ;
-    grid-template-columns: 4rem 1fr 10rem;
+    grid-template-columns: 4rem 1fr 10rem max-content;
 
     align-items: center;
     column-gap: 1rem;
@@ -15,46 +15,57 @@
     border-radius: 10px;
 
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    @include for-mobile-layout {
+        column-gap: 0.5rem;
+        grid-template-columns: max-content 1fr max-content max-content;
+    }
 
-    & img{
+    & img {
         grid-area: img;
         height: 2.5rem;
     }
 
-    & .category{
+    & .category {
         grid-area: cat;
         text-transform: capitalize;
     }
 
-    & .notes{
+    & .notes {
         grid-area: note;
+        display: -webkit-box;
+        max-width: 200px;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
     }
 
-    & .amount{
+    & .amount {
         grid-area: amnt;
         justify-self: end;
     }
 
-    & .date{
+    & .date {
         grid-area: date;
         justify-self: end;
     }
 
-    & .del-btn{
+    & .del-btn {
         grid-area: del;
         font-size: 1rem;
     }
 
-    & .edit-btn{
+    & .edit-btn {
         grid-area: edit;
     }
 
-    & button{
+    & button {
         background: none;
         border: none;
 
         transition: transform 200ms;
-        &:hover{
+
+        &:hover {
             transform: scale(1.2);
         }
     }
